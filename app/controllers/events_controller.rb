@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 	before_action :set_event, only: [:show]
 
 	def index
-		@events = Event.all
+		@events = Event.includes(:repo, :actor)
 		json_response(@events)
 	end
 
