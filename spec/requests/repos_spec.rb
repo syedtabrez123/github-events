@@ -10,7 +10,7 @@ RSpec.describe 'Repos API', type: :request do
 
     it 'returns repo events' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(5)
+      expect(json['data'].size).to eq(5)
     end
 
     it 'returns status code 200' do

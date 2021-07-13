@@ -27,10 +27,10 @@ RSpec.describe 'Events API', type: :request do
 	    end
 
 	    it 'returns an event object matching above params' do
-	    	expect(json["event_type"]).to eq('PushEvent')
-	    	expect(json["public"]).to eq(true)
-	    	expect(json["repo_id"]).to eq(repo.id)
-	    	expect(json["actor_id"]).to eq(user.id)
+	    	expect(json['data']['attributes']['event-type']).to eq('PushEvent')
+	    	expect(json['data']['attributes']['public']).to eq(true)
+	    	expect(json['data']['relationships']['repo']['data']['id'].to_i).to eq(repo.id)
+	    	expect(json['data']['relationships']['actor']['data']['id'].to_i).to eq(user.id)
 	    end	
   	end
 
@@ -65,7 +65,7 @@ RSpec.describe 'Events API', type: :request do
 
     it 'returns events' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json['data'].size).to eq(10)
     end
 
     it 'returns status code 200' do
@@ -90,10 +90,10 @@ RSpec.describe 'Events API', type: :request do
 	    end
 
 	    it 'returns an event object matching above params' do
-	    	expect(json["event_type"]).to eq(event.event_type)
-	    	expect(json["public"]).to eq(event.public)
-	    	expect(json["repo_id"]).to eq(repo.id)
-	    	expect(json["actor_id"]).to eq(user.id)
+	    	expect(json['data']['attributes']['event-type']).to eq(event.event_type)
+	    	expect(json['data']['attributes']['public']).to eq(event.public)
+	    	expect(json['data']['relationships']['repo']['data']['id'].to_i).to eq(repo.id)
+	    	expect(json['data']['relationships']['actor']['data']['id'].to_i).to eq(user.id)
 	    end
 	  end
 
